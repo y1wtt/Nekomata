@@ -1,11 +1,11 @@
 package net.y1wtt.cuteenginyaer
 
+import discord4j.core.DiscordClient
 import discord4j.core.DiscordClientBuilder
 import discord4j.core.event.domain.Event
 import discord4j.core.event.domain.guild.GuildCreateEvent
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent
 import discord4j.core.event.domain.lifecycle.ReadyEvent
-import discord4j.discordjson.json.ApplicationCommandData
 import discord4j.rest.interaction.GuildCommandRegistrar
 import kotlinx.coroutines.reactor.mono
 import net.y1wtt.cuteenginyaer.handler.discord.CommandLitener
@@ -19,7 +19,7 @@ class DiscordSubscriber {
 	private val log: Logger = Loggers.getLogger(DiscordSubscriber::class.java)
 
 	companion object {
-		val client = DiscordClientBuilder.create(AppConfigLoader.load().discord.token)
+		val client: DiscordClient = DiscordClientBuilder.create(AppConfigLoader.load().discord.token)
 			.build()
 	}
 
@@ -36,8 +36,8 @@ class DiscordSubscriber {
 							CommandLitener().commandList()
 						)
 							.registerCommands(it.guild.id)
-							.doOnError { e: Throwable? -> log.warn("Unable to create guild command", e) }
-							.onErrorResume { _: Throwable? -> Mono.empty<ApplicationCommandData?>() }
+							.doOnError { e: Throwable -> log.warn("Unable to create guild command", e) }
+							.onErrorResume { _: Throwable -> Mono.empty() }
 							.blockLast()
 					}
 					it.on(Event::class.java).subscribe {
