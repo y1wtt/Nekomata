@@ -1,14 +1,12 @@
 package net.y1wtt.cuteenginyaer.handler.discord.commands;
 
-import discord4j.core.event.domain.interaction.ChatInputInteractionEvent
-import discord4j.discordjson.json.ApplicationCommandOptionData
-
-import reactor.core.publisher.Mono
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.interactions.commands.build.OptionData
 
 
 interface SlashCommand {
 	val name: String
 	val description:String
-	val options:List<ApplicationCommandOptionData>
-	fun handle(event: ChatInputInteractionEvent): Mono<Unit?>
+	val options:List<OptionData>
+	fun handle(event: SlashCommandInteractionEvent)
 }
