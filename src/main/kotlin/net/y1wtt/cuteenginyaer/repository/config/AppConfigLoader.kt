@@ -6,7 +6,7 @@ object AppConfigLoader {
 	private val yamlLoader = Yaml.default
 	private var text = ""
 	fun load(): AppConfig {
-		if (text.length == 0){
+		if (text.isEmpty()){
 			val inputStream = this::class.java.classLoader.getResourceAsStream("AppConf.yml")
 			text = inputStream?.bufferedReader().use { it?.readText()!! }
 		}
