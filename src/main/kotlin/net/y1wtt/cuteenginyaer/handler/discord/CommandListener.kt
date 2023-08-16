@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT.ChatGPT
 import net.y1wtt.cuteenginyaer.commands.ChatCommand
 import net.y1wtt.cuteenginyaer.commands.SlashCommand
+import net.y1wtt.cuteenginyaer.repository.ThreadsWriter
 import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
 import reactor.util.Logger
 import reactor.util.Loggers
@@ -48,10 +49,16 @@ class CommandListener : ListenerAdapter() {
 			val history = event.message.channel.asGuildMessageChannel().iterableHistory
 			val subList = history.sortedBy { message: Message? -> message?.timeCreated }
 				.subList(1, history.count())
-			if (subList.last()?.author?.isBot == false) {
+			if (subList.isNotEmpty() && subList.last()?.author?.isBot == false) {
+				val channel = event.message.channel.asThreadChannel()
+				channel.sendTyping().queue()
+				//TODO DIとかでいい感じにしたいね
 				ChatGPT.getInstance().completions(subList.map {
 					ChatContext(if (it.author.isBot) "assistant" else "user", it.contentRaw)
-				})
+				}).let {
+					ThreadsWriter(channel).writeByResult(it)
+				}
+
 			}
 		}
 	}
