@@ -1,5 +1,6 @@
 package net.y1wtt.cuteenginyaer.commands
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
@@ -24,10 +25,17 @@ class ChatCommand : SlashCommand {
 		).queue { m ->
 			m?.createThreadChannel(event.getOption("prompt")?.asString)?.queue {
 				//TODO DIとかでいい感じにしたいね
-				ChatGPT.getInstance().completions(listOf())?.let { it1 ->
-					it.sendMessage(
-						it1
-					).queue()
+				ChatGPT.getInstance().completions(listOf())?.let { response ->
+					it?.sendMessage(
+						//TODO エラー処理書きたいね
+						ObjectMapper()
+							.readTree(response)
+							.get("choices")
+							.get(0)
+							.get("message")
+							.get("content")
+							.toString()
+					)?.queue()
 				}
 			}
 		}
