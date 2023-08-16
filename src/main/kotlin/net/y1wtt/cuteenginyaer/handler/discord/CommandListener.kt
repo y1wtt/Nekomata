@@ -5,8 +5,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.commands.build.Commands
-import net.y1wtt.cuteenginyaer.handler.discord.commands.ChatCommand
-import net.y1wtt.cuteenginyaer.handler.discord.commands.SlashCommand
+import net.y1wtt.cuteenginyaer.commands.ChatCommand
+import net.y1wtt.cuteenginyaer.commands.SlashCommand
 
 
 class CommandListener : ListenerAdapter() {

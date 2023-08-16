@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer.handler.discord.commands;
+package net.y1wtt.cuteenginyaer.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
