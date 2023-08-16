@@ -3,7 +3,12 @@ package net.y1wtt.cuteenginyaer.repository.config
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class chatgpt(val chatAIEndpoint: String = "", val initialPrompt: String = "")
+data class chatgpt(
+	val chatAIEndpoint: String = "",
+	val token: String = "",
+	val modelName: String = "",
+	val initialPrompt: String = ""
+)
 
 @Serializable
 data class discord(val token: String = "")
