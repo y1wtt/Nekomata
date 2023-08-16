@@ -1,6 +1,5 @@
 package net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT
 
-import net.y1wtt.cuteenginyaer.DiscordSubscriber
 import net.y1wtt.cuteenginyaer.repository.chatai.ChatAI
 import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
 import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
@@ -19,7 +18,7 @@ class ChatGPT private constructor(
 	appConfig: AppConfig = AppConfigLoader.load(),
 	httpClient: OkHttpClient = OkHttpClient()
 ) : ChatAI {
-	private val log: Logger = Loggers.getLogger(DiscordSubscriber::class.java)
+	private val log: Logger = Loggers.getLogger(ChatGPT::class.java)
 
 	private val appConfig: AppConfig;
 	private val httpClient: OkHttpClient;
@@ -41,15 +40,15 @@ class ChatGPT private constructor(
 
 	override fun completions(context: List<ChatContext>): String? {
 		val conf = AppConfigLoader.load().chatgpt
+		val ctx = listOf(ChatContext("system", conf.initialPrompt)) + context
 		val body: RequestBody =
-			ChatGPTCompletionRequest(conf.modelName, listOf(ChatContext("system", conf.initialPrompt)) + context)
+			ChatGPTCompletionRequest(conf.model, ctx)
 				.toJson()
 				.toRequestBody("application/json; charset=utf-8".toMediaType())
 
-
 		val request: Request = Request.Builder()
 			.url(appConfig.chatgpt.chatAIEndpoint)
-			.addHeader("Authorization","bearer ${conf.token}")
+			.addHeader("Authorization","Bearer ${conf.token}")
 			.post(body)
 			.build()
 

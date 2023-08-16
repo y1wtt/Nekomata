@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class chatgpt(
 	val chatAIEndpoint: String = "",
 	val token: String = "",
-	val modelName: String = "",
+	val model: String = "",
 	val initialPrompt: String = ""
 )
 
