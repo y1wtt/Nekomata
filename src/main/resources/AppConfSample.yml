@@ -1,0 +1,7 @@
+chatgpt:
+  chatAIEndpoint: "https://api.openai.com/v1/chat/completions"
+  model: "gpt-3.5-turbo"
+  token: "your token"
+  initialPrompt: "your prompt"
+discord:
+  token: "your token"
