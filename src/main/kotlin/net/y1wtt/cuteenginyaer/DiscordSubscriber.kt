@@ -7,7 +7,6 @@ import discord4j.core.event.domain.interaction.ChatInputInteractionEvent
 import discord4j.core.event.domain.lifecycle.ReadyEvent
 import discord4j.discordjson.json.ApplicationCommandData
 import discord4j.rest.interaction.GuildCommandRegistrar
-import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.mono
 import net.y1wtt.cuteenginyaer.handler.discord.CommandLitener
 import net.y1wtt.cuteenginyaer.repository.config.AppConfigLoader
@@ -16,8 +15,8 @@ import reactor.util.Logger
 import reactor.util.Loggers
 
 
-class DiscordListener {
-	private val log: Logger = Loggers.getLogger(DiscordListener::class.java)
+class DiscordSubscriber {
+	private val log: Logger = Loggers.getLogger(DiscordSubscriber::class.java)
 
 	companion object {
 		val client = DiscordClientBuilder.create(AppConfigLoader.load().discord.token)
