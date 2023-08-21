@@ -1,5 +1,7 @@
 package net.y1wtt.cuteenginyaer.repository.chatai
 
-interface ChatAI {
-	fun completions(context: List<ChatContext>): Result<String>
+import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+
+fun interface ChatAI<T> {
+	fun completions(context: List<ChatContext>): Result<T>
 }

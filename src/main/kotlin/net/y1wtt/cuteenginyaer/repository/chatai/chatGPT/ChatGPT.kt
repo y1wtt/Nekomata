@@ -2,10 +2,10 @@ package net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.ObjectMapper
+import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.model.config.AppConfig
 import net.y1wtt.cuteenginyaer.repository.chatai.ChatAI
-import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
 import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
-import net.y1wtt.cuteenginyaer.repository.config.AppConfig
 import net.y1wtt.cuteenginyaer.repository.config.AppConfigLoader
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -23,7 +23,7 @@ class ChatGPT private constructor(
 	httpClient: OkHttpClient = OkHttpClient.Builder()
 		.readTimeout(1, TimeUnit.MINUTES)
 		.build()
-) : ChatAI {
+) : ChatAI<String> {
 	private val log: Logger = Loggers.getLogger(ChatGPT::class.java)
 
 	private val appConfig: AppConfig;
@@ -45,14 +45,14 @@ class ChatGPT private constructor(
 	}
 
 	override fun completions(context: List<ChatContext>): Result<String> {
-		val conf = AppConfigLoader.load().chatgpt
+		val conf = AppConfigLoader.load().chatGPT
 		val ctx = listOf(ChatContext("system", conf.initialPrompt)) + context
 		val body: RequestBody =
 			ChatGPTCompletionRequest(conf.model, ctx)
 				.toJson()
 				.toRequestBody("application/json; charset=utf-8".toMediaType())
 		val request: Request = Request.Builder()
-			.url(appConfig.chatgpt.chatAIEndpoint)
+			.url(appConfig.chatGPT.chatAIEndpoint)
 			.addHeader("Authorization", "Bearer ${conf.token}")
 			.post(body)
 			.build()

@@ -1,9 +1,10 @@
-package net.y1wtt.cuteenginyaer.repository.config
+package net.y1wtt.cuteenginyaer.model.config
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class chatgpt(
+data class ChatGPT(
 	val chatAIEndpoint: String = "",
 	val token: String = "",
 	val model: String = "",
@@ -11,10 +12,11 @@ data class chatgpt(
 )
 
 @Serializable
-data class discord(val token: String = "")
+data class Discord(val token: String = "")
 
 @Serializable
 data class AppConfig(
-	val chatgpt: chatgpt,
-	val discord: discord
+	@SerialName("chatgpt")
+	val chatGPT: ChatGPT,
+	val discord: Discord
 )

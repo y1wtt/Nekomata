@@ -1,7 +1,7 @@
+import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
-import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
 
 class ChatGPTTest {
 	@Test

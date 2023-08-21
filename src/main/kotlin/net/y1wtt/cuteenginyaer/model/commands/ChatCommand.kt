@@ -1,12 +1,12 @@
-package net.y1wtt.cuteenginyaer.commands
+package net.y1wtt.cuteenginyaer.model.commands
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT.ChatGPT
-import net.y1wtt.cuteenginyaer.repository.ThreadsWriter
-import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.repository.discord.ThreadRepository
 
 class ChatCommand : SlashCommand {
 	override val name: String
@@ -29,7 +29,7 @@ class ChatCommand : SlashCommand {
 				it.sendTyping().queue()
 				//TODO DIとかでいい感じにしたいね
 				ChatGPT.getInstance().completions(listOf(ChatContext("user", prompt)))?.let { response ->
-					ThreadsWriter(it).writeByResult(response)
+					ThreadRepository(it).insertByResult(response)
 				}
 			}
 		}

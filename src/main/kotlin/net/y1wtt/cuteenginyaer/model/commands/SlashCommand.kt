@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer.commands;
+package net.y1wtt.cuteenginyaer.model.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.OptionData

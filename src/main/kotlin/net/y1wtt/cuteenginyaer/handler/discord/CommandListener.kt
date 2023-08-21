@@ -9,10 +9,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT.ChatGPT
-import net.y1wtt.cuteenginyaer.commands.ChatCommand
-import net.y1wtt.cuteenginyaer.commands.SlashCommand
-import net.y1wtt.cuteenginyaer.repository.ThreadsWriter
-import net.y1wtt.cuteenginyaer.repository.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+import net.y1wtt.cuteenginyaer.model.commands.ChatCommand
+import net.y1wtt.cuteenginyaer.model.commands.SlashCommand
+import net.y1wtt.cuteenginyaer.repository.discord.ThreadRepository
 import reactor.util.Logger
 import reactor.util.Loggers
 
@@ -36,7 +36,7 @@ class CommandListener : ListenerAdapter() {
 
 	override fun onSlashCommandInteraction(e: SlashCommandInteractionEvent) {
 		println(e)
-		this.handle(e)
+		this.handleCommands(e)
 	}
 
 	override fun onGenericEvent(event: GenericEvent) {
@@ -56,14 +56,14 @@ class CommandListener : ListenerAdapter() {
 				ChatGPT.getInstance().completions(subList.map {
 					ChatContext(if (it.author.isBot) "assistant" else "user", it.contentRaw)
 				}).let {
-					ThreadsWriter(channel).writeByResult(it)
+					ThreadRepository(channel).insertByResult(it)
 				}
 
 			}
 		}
 	}
 
-	fun handle(event: SlashCommandInteractionEvent) {
+	fun handleCommands(event: SlashCommandInteractionEvent) {
 
 		commands.filter { command: SlashCommand ->
 			command.name == event.name

@@ -1,16 +1,16 @@
-package net.y1wtt.cuteenginyaer.repository
+package net.y1wtt.cuteenginyaer.repository.discord
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel
 import java.awt.Color
 
-class ThreadsWriter(tc:ThreadChannel?) {
+class ThreadRepository(tc:ThreadChannel?) {
 	private val channel:ThreadChannel?
 	init {
 		channel = tc
 	}
 
-	fun writeByResult(res:Result<String>): Unit {
+	fun insertByResult(res:Result<String>): Unit {
 		if (res.isSuccess) {
 			channel?.sendMessage(res.getOrDefault(""))?.queue()
 		} else {
