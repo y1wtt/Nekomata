@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer.model.commands;
+package net.y1wtt.nekomata.entities.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.OptionData

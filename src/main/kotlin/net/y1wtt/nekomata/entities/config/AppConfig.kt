@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer.model.config
+package net.y1wtt.nekomata.entities.config
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,7 +1,7 @@
-package net.y1wtt.cuteenginyaer.repository.config
+package net.y1wtt.nekomata.repository.config
 
 import com.charleskorn.kaml.Yaml
-import net.y1wtt.cuteenginyaer.model.config.AppConfig
+import net.y1wtt.nekomata.entities.config.AppConfig
 
 object AppConfigLoader {
 

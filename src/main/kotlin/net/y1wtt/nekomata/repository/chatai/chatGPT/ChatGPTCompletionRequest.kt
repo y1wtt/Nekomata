@@ -1,7 +1,7 @@
-package net.y1wtt.cuteenginyaer.repository.chatai.chatGPT
+package net.y1wtt.nekomata.repository.chatai.chatGPT
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
+import net.y1wtt.nekomata.entities.chatai.ChatContext
 
 data class ChatGPTCompletionRequest(
 	val model: String = "",

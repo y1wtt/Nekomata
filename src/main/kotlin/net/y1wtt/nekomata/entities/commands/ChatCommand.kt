@@ -1,12 +1,12 @@
-package net.y1wtt.cuteenginyaer.model.commands
+package net.y1wtt.nekomata.entities.commands
 
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT.ChatGPT
-import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
-import net.y1wtt.cuteenginyaer.repository.discord.ThreadRepository
+import net.y1wtt.nekomata.entities.chatai.ChatContext
+import net.y1wtt.nekomata.repository.discord.ThreadRepository
 
 class ChatCommand : SlashCommand {
 	override val name: String
@@ -28,7 +28,7 @@ class ChatCommand : SlashCommand {
 			m?.createThreadChannel(prompt)?.queue {
 				it.sendTyping().queue()
 				//TODO DIとかでいい感じにしたいね
-				ChatGPT.getInstance().completions(listOf(ChatContext("user", prompt)))?.let { response ->
+				ChatGPT.getInstance().completions(listOf(ChatContext("user", prompt))).let { response ->
 					ThreadRepository(it).insertByResult(response)
 				}
 			}

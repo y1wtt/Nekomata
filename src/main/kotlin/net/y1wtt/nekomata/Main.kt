@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer
+package net.y1wtt.nekomata
 
 import kotlinx.coroutines.runBlocking
 

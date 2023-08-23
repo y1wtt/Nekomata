@@ -1,4 +1,4 @@
-package net.y1wtt.cuteenginyaer.model.chatai
+package net.y1wtt.nekomata.entities.chatai
 
 data class ChatContext(
 	val role: String,

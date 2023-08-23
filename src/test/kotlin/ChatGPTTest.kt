@@ -1,5 +1,5 @@
-import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
-import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
+import net.y1wtt.nekomata.entities.chatai.ChatContext
+import net.y1wtt.nekomata.repository.chatai.chatGPT.ChatGPTCompletionRequest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

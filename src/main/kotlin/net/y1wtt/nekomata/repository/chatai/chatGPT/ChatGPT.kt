@@ -2,19 +2,18 @@ package net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.ObjectMapper
-import net.y1wtt.cuteenginyaer.model.chatai.ChatContext
-import net.y1wtt.cuteenginyaer.model.config.AppConfig
-import net.y1wtt.cuteenginyaer.repository.chatai.ChatAI
-import net.y1wtt.cuteenginyaer.repository.chatai.chatGPT.ChatGPTCompletionRequest
-import net.y1wtt.cuteenginyaer.repository.config.AppConfigLoader
+import net.y1wtt.nekomata.entities.chatai.ChatContext
+import net.y1wtt.nekomata.entities.config.AppConfig
+import net.y1wtt.nekomata.repository.chatai.ChatAI
+import net.y1wtt.nekomata.repository.chatai.chatGPT.ChatGPTCompletionRequest
+import net.y1wtt.nekomata.repository.config.AppConfigLoader
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
-import reactor.util.Logger
-import reactor.util.Loggers
+import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -24,7 +23,7 @@ class ChatGPT private constructor(
 		.readTimeout(1, TimeUnit.MINUTES)
 		.build()
 ) : ChatAI<String> {
-	private val log: Logger = Loggers.getLogger(ChatGPT::class.java)
+	private val log = LoggerFactory.getLogger(this.javaClass)
 
 	private val appConfig: AppConfig;
 	private val httpClient: OkHttpClient;
