@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
-import net.y1wtt.CuteEnginyaer.repository.chatai.chatGPT.ChatGPT
+import net.y1wtt.nekomata.repository.chatai.chatGPT.ChatGPT
 import net.y1wtt.nekomata.entities.chatai.ChatContext
 import net.y1wtt.nekomata.repository.discord.ThreadRepository
 
