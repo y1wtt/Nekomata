@@ -11,6 +11,12 @@ repositories {
     mavenCentral()
 }
 
+allprojects {
+    kotlin {
+        jvmToolchain(21)
+    }
+}
+
 subprojects {
     repositories {
         mavenCentral()
@@ -34,9 +40,5 @@ subprojects {
 
     tasks.withType(Test) {
         useJUnitPlatform()
-    }
-
-    kotlin {
-        jvmToolchain(21)
     }
 }
