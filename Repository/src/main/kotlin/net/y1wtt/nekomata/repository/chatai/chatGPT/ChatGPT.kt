@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.y1wtt.nekomata.entity.chatai.ChatContext
 import net.y1wtt.nekomata.entity.config.AppConfig
 import net.y1wtt.nekomata.repository.config.AppConfigLoader
-import net.y1wtt.nekomata.service.chatAI.ChatAI
+import net.y1wtt.nekomata.service.chatAI.ChatAIRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class ChatGPT(
     private val appConfig: AppConfig,
-) : ChatAI<String> {
+) : ChatAIRepository<String> {
     private val log = LoggerFactory.getLogger(this.javaClass)
 
     companion object {
