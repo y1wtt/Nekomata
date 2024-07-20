@@ -1,8 +1,8 @@
  package net.y1wtt.nekomata.entity.chatai
 
-enum class SpeakerRoles(val role: String) {
+enum class SpeakerRoles(private val role: String) {
     SYSTEM("system"),
-    ASSIST("assist"),
+    ASSISTANT("assistant"),
     USER("user");
     override fun toString(): String {
         return role
