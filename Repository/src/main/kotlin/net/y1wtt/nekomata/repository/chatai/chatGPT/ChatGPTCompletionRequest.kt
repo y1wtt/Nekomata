@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.y1wtt.nekomata.entity.chatai.ChatContext
 import net.y1wtt.nekomata.entity.chatai.SpeakerRoles
 
-data class ChatGPTChatEntry(val roles: String, val content: String)
+data class ChatGPTChatEntry(val role: String, val content: String)
 
 data class ChatGPTCompletionRequest(
-    val model: String = "",
+    val model: String,
     val messages: List<ChatGPTChatEntry>
 ) {
-    constructor(model: String, messages: List<ChatContext>) : this(model, messages.map {
+    constructor(model: String, messages: ChatContext) : this(model, messages.ctx.map {
         ChatGPTChatEntry(
             when (it.role) {
                 SpeakerRoles.SYSTEM -> "system"

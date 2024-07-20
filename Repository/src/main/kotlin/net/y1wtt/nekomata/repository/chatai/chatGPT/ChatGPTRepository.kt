@@ -3,6 +3,7 @@ package net.y1wtt.nekomata.repository.chatai.chatGPT
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.ObjectMapper
 import net.y1wtt.nekomata.entity.chatai.ChatContext
+import net.y1wtt.nekomata.entity.chatai.ChatEntry
 import net.y1wtt.nekomata.entity.config.ChatGPTConfig
 import net.y1wtt.nekomata.service.chatAI.ChatAIRepository
 import okhttp3.MediaType.Companion.toMediaType
@@ -26,7 +27,7 @@ class ChatGPTRepository(
             .build()
     }
 
-    override fun completions(context: List<ChatContext>): Result<String> {
+    override fun completions(context: ChatContext): Result<String> {
 
         val body: RequestBody =
             ChatGPTCompletionRequest(conf.model, context)
