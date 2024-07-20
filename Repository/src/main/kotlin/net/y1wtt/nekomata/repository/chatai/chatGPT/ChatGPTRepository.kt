@@ -1,10 +1,9 @@
- package net.y1wtt.nekomata.repository.chatai.chatGPT
+package net.y1wtt.nekomata.repository.chatai.chatGPT
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.ObjectMapper
 import net.y1wtt.nekomata.entity.chatai.ChatContext
-import net.y1wtt.nekomata.entity.config.AppConfig
-import net.y1wtt.nekomata.repository.config.AppConfigLoader
+import net.y1wtt.nekomata.entity.config.ChatGPTConfig
 import net.y1wtt.nekomata.service.chatAI.ChatAIRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -16,8 +15,8 @@ import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 
-class ChatGPT(
-    private val appConfig: AppConfig,
+class ChatGPTRepository(
+    private val conf: ChatGPTConfig,
 ) : ChatAIRepository<String> {
     private val log = LoggerFactory.getLogger(this.javaClass)
 
@@ -28,14 +27,13 @@ class ChatGPT(
     }
 
     override fun completions(context: List<ChatContext>): Result<String> {
-        val conf = AppConfigLoader.load().chatGPT
-        val ctx = listOf(ChatContext("system", conf.initialPrompt)) + context
+
         val body: RequestBody =
-            ChatGPTCompletionRequest(conf.model, ctx)
+            ChatGPTCompletionRequest(conf.model, context)
                 .toJson()
                 .toRequestBody("application/json; charset=utf-8".toMediaType())
         val request: Request = Request.Builder()
-            .url(appConfig.chatGPT.chatAIEndpoint)
+            .url(conf.chatAIEndpoint)
             .addHeader("Authorization", "Bearer ${conf.token}")
             .post(body)
             .build()
